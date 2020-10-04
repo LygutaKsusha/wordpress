@@ -415,7 +415,7 @@ Resources:
               command: !Join 
                 - ''
                 - - >-
-                    ansible-pull -U https://github.com/hasith4/Candidate-27wCSgiY0b.git
+                    ansible-pull -U https://github.com/LygutaKsusha/wordpress.git
                     local.yaml -e
                   - ' ''wordpress_db_host='
                   - !GetAtt
