@@ -1,0 +1,20 @@
+---
+- name: Install php7.3 using amazon-linux-extras
+  shell: "amazon-linux-extras enable php7.3"
+
+- name: Install additional php extensions
+  package: name={{ item }} state=present
+  with_items:
+    - php-common
+    - php-mysqlnd
+    - php-gd
+    - php-xml
+    - php-mbstring
+    - php-cli
+    - php-fpm
+
+- name: Ensure php-fpm service has started
+  service: name=php-fpm state=started
+
+- name: Enable php-fpm service
+  service: name=php-fpm enabled=yes

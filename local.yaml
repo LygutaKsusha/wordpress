@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - common
+    - php
+    - httpd
+    - mariadb-client
+    - wordpress

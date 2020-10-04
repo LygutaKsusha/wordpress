@@ -1,0 +1,9 @@
+---
+- name: Install httpd
+  package: name=httpd state=present
+
+- name: Ensure the httpd service has started
+  service: name=httpd state=started
+
+- name: Enable httpd service
+  service: name=httpd enabled=yes
