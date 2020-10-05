@@ -6,6 +6,7 @@
 
 ### Usage ###
  - Download the WPCloudformation.yaml from the GIT repository.
+ - You would need VPC created before with subnats in your account
  - Open the AWS console, go to CloudFormation, upload the WPCloudformation.yaml file, provide the requested parameters and create the stack.
  - Once the stack is created WordPress URL can be found in the output section.
 
