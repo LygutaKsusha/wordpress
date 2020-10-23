@@ -32,14 +32,6 @@ Metadata:
       - VaultNumberOfKeysForUnseal
       - VaultClientRoleName
       - VaultClientNodes
-      - VaultKubernetesEnable
-      - VaultKubernetesHostURL
-      - VaultKubernetesRoleName
-      - VaultKubernetesCertificate
-      - VaultKubernetesJWT
-      - VaultKubernetesServiceAccount
-      - VaultKubernetesNameSpace
-      - VaultKubernetesPolicies
     - Label:
         default: AWS Quick Start configuration
       Parameters:
@@ -108,22 +100,6 @@ Metadata:
         default: Hosted-zone ID
       DomainName:
         default: Load balancer DNS domain name
-      VaultKubernetesEnable:
-        default: "Enable Kubernetes authentication"
-      VaultKubernetesRoleName:
-        default: Kubernetes Vault role name
-      VaultKubernetesHostURL:
-        default: "Kubernetes host URL"
-      VaultKubernetesCertificate:
-        default: "Kubernetes CA certificate"
-      VaultKubernetesJWT:
-        default: "Kubernetes JWT token"
-      VaultKubernetesServiceAccount:
-        default: "Kubernetes service account name"
-      VaultKubernetesNameSpace:
-        default: "Kubernetes name space"
-      VaultKubernetesPolicies:
-        default: "Kubernetes Vault policies"
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
 Parameters:
