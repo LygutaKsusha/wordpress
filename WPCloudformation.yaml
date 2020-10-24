@@ -320,13 +320,6 @@ Resources:
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
-            - '/opt/aws/bin/cfn-signal -e $? '
-            - '         --stack '
-            - !Ref 'AWS::StackName'
-            - '         --resource LaunchConfig '
-            - '         --region '
-            - !Ref 'AWS::Region'
-            - |+
     CreationPolicy:
       ResourceSignal:
         Timeout: PT15M
