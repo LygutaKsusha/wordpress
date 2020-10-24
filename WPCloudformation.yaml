@@ -133,15 +133,11 @@ Mappings:
       Arch: HVM64
     t2.medium:
       Arch: HVM64
-    t2.large:
   
   AWSRegionArch2AMI:
     us-east-1:
       HVM64: ami-0de53d8956e8dcf80
       HVMG2: ami-0aeb704d503081ea6
-    eu-central-1:
-      HVM64: ami-09def150731bdbcc2
-      HVMG2: ami-0aa1822e3eb913a11
 
 Resources:
 
