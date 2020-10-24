@@ -43,14 +43,14 @@ Parameters:
     MaxLength: '50'
     ConstraintDescription: Must be between 4 and 50 characters
 
-  WPAdminPass:
-    NoEcho: 'true'
-    Description: The WordPress admin account password
-    Type: String
-    MinLength: '4'
-    MaxLength: '20'
-    AllowedPattern: '[a-zA-Z0-9]*'
-    ConstraintDescription: Must be between 4 and 20 characters
+  #WPAdminPass:
+  #  NoEcho: 'true'
+  #  Description: The WordPress admin account password
+  #  Type: String
+  #  MinLength: '4'
+  #  MaxLength: '20'
+  #  AllowedPattern: '[a-zA-Z0-9]*'
+  #  ConstraintDescription: Must be between 4 and 20 characters
 
 
   SSHLocation:
@@ -129,10 +129,13 @@ Parameters:
   
 Mappings:
   AWSInstanceType2Arch:
+    t1.micro:
+      Arch: HVM64
+    t2.micro:
+      Arch: HVM64
     t2.small:
       Arch: HVM64
-    t2.medium:
-      Arch: HVM64
+
   
   AWSRegionArch2AMI:
     us-east-1:
@@ -200,7 +203,7 @@ Resources:
       MasterUsername: !Ref DBUser
       DBInstanceClass: !Ref DBClass
       AllocatedStorage: !Ref DBAllocatedStorage
-      MasterUserPassword: '{{resolve:ssm-secure:DBPassword:1}}'
+      MasterUserPassword: '{{resolve:ssm:DBPassword:1}}'
       DBSubnetGroupName: !Ref PrivateDBSubnetGroup
       VPCSecurityGroups: 
         - !Ref DBSecurityGroup
@@ -223,11 +226,9 @@ Resources:
                   - stack=
                   - !Ref 'AWS::StackId'
                   - |+
-
                   - region=
                   - !Ref 'AWS::Region'
                   - |+
-
               mode: '000400'
               owner: root
               group: root
@@ -248,7 +249,6 @@ Resources:
                   - '         --region '
                   - !Ref 'AWS::Region'
                   - |+
-
               mode: '000400'
               owner: root
               group: root
@@ -278,13 +278,13 @@ Resources:
                   - ' wordpress_db_user='
                   - !Ref DBUser
                   - ' wordpress_db_pass='
-                  - !Ref DBPassword
+                  - '{{resolve:ssm:DBPassword:1}}'
                   - ' wordpress_site_title='
                   - !Ref WPSiteTitle
                   - ' wordpress_admin_user='
                   - !Ref WPAdminUser
                   - ' wordpress_admin_pass='
-                  - !Ref WPAdminPass
+                  - '{{resolve:ssm:WPAdminPass:1}}'
                   - ' wordpress_admin_email='
                   - !Ref WPAdminEmail
                   - ''''
@@ -320,7 +320,6 @@ Resources:
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
-
             - '/opt/aws/bin/cfn-signal -e $? '
             - '         --stack '
             - !Ref 'AWS::StackName'
@@ -328,7 +327,6 @@ Resources:
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
-
     CreationPolicy:
       ResourceSignal:
         Timeout: PT15M
@@ -365,5 +363,3 @@ Outputs:
     URL:
         Description: URL to the application
         Value: !GetAtt AppElb.DNSName
-
-        
